@@ -1,11 +1,15 @@
 package com.example.security.service;
 
+import com.example.security.DTO.RoleDto;
+import com.example.security.DTO.UserDto;
 import com.example.security.domain.Role;
 import com.example.security.domain.User;
 import com.example.security.repo.RoleRepo;
 import com.example.security.repo.UserRepo;
+import com.example.security.utils.ModelMapping;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,6 +30,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
     private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -47,16 +52,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User saveUser(User user) {
+    public UserDto saveUser(UserDto userDto) {
+        var user = convertUserDtoToEntity(userDto);
         log.info("Saving new user {} to db", user.getName());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepo.save(user);
+        var savedUser = userRepo.save(user);
+        return convertUserEntityToDto(savedUser);
     }
 
     @Override
-    public Role saveRole(Role role) {
+    public RoleDto saveRole(RoleDto roleDto) {
+        var role = convertRoleDtoToEntity(roleDto);
         log.info("Saving new {} to db", role.getName());
-        return roleRepo.save(role);
+        var savedRole = roleRepo.save(role);
+        return convertRoleEntityToDto(savedRole);
     }
 
     @Override
@@ -68,14 +77,42 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User getUser(String username) {
+    public UserDto getUserByUsername(String username) {
         log.info("Getting user by username: {}", username);
-        return userRepo.findByUsername(username);
+        var user = userRepo.findByUsername(username);
+        return convertUserEntityToDto(user);
     }
 
     @Override
-    public List<User> getUsers() {
-        log.info("Getting all users");
-        return userRepo.findAll();
+    public List<UserDto> getUsers() {
+        log.info("Getting all users from db");
+        return userRepo.findAll()
+                .stream()
+                .map(this::convertUserEntityToDto)
+                .toList();
+    }
+
+    @Override
+    public UserDto convertUserEntityToDto(User user) {
+        ModelMapping.configureDefaultModelMapper(modelMapper);
+        return modelMapper.map(user, UserDto.class);
+    }
+
+    @Override
+    public User convertUserDtoToEntity(UserDto userDto) {
+        ModelMapping.configureDefaultModelMapper(modelMapper);
+        return modelMapper.map(userDto, User.class);
+    }
+
+    @Override
+    public RoleDto convertRoleEntityToDto(Role role) {
+        ModelMapping.configureDefaultModelMapper(modelMapper);
+        return modelMapper.map(role, RoleDto.class);
+    }
+
+    @Override
+    public Role convertRoleDtoToEntity(RoleDto roleDto) {
+        ModelMapping.configureDefaultModelMapper(modelMapper);
+        return modelMapper.map(roleDto, Role.class);
     }
 }

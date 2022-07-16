@@ -1,8 +1,8 @@
 package com.example.security.api;
 
-import com.example.security.domain.Role;
+import com.example.security.DTO.RoleDto;
+import com.example.security.DTO.UserDto;
 import com.example.security.domain.RoleToUserForm;
-import com.example.security.domain.User;
 import com.example.security.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,26 +19,31 @@ public class UserResource {
     private final UserService userService;
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> getUsers() {
+    public ResponseEntity<List<UserDto>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
+    @GetMapping("/user/{username}")
+    public ResponseEntity<UserDto> getUserByName(@PathVariable String username) {
+        return ResponseEntity.ok().body(userService.getUserByUsername(username));
+    }
+
     @PostMapping("/user/save")
-    public ResponseEntity<User> saveUser(@RequestBody User user) {
+    public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) {
         var uri = URI.create(ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/api/user/save").toUriString());
-        return ResponseEntity.created(uri).body(userService.saveUser(user));
+        return ResponseEntity.created(uri).body(userService.saveUser(userDto));
     }
 
     @PostMapping("/role/save")
-    public ResponseEntity<Role> saveRole(@RequestBody Role role) {
+    public ResponseEntity<RoleDto> saveRole(@RequestBody RoleDto roleDto) {
         var uri = URI.create(ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/api/role/save").toUriString());
-        return ResponseEntity.created(uri).body(userService.saveRole(role));
+        return ResponseEntity.created(uri).body(userService.saveRole(roleDto));
     }
 
     @PostMapping("/role/addToUser")
-    public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm form) {
+    public ResponseEntity<Void> addRoleToUser(@RequestBody RoleToUserForm form) {
         userService.addRoleToUser(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
