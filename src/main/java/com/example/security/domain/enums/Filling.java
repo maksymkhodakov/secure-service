@@ -10,8 +10,8 @@ public enum Filling {
         this.type = type;
     }
 
-    private Integer id;
-    private String type;
+    private final Integer id;
+    private final String type;
 
     public Integer getId() {
         return id;
