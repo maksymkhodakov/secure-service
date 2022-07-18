@@ -1,4 +1,4 @@
-package com.example.security.service;
+package com.example.security.service.implementations;
 
 import com.example.security.DTO.RoleDto;
 import com.example.security.DTO.UserDto;
@@ -6,6 +6,7 @@ import com.example.security.domain.Role;
 import com.example.security.domain.User;
 import com.example.security.repo.RoleRepo;
 import com.example.security.repo.UserRepo;
+import com.example.security.service.interfaces.UserService;
 import com.example.security.utils.ModelMapping;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

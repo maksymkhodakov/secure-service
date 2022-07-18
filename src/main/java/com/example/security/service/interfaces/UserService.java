@@ -1,4 +1,4 @@
-package com.example.security.service;
+package com.example.security.service.interfaces;
 
 
 import com.example.security.DTO.RoleDto;

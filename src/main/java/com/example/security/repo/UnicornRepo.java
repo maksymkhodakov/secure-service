@@ -1,11 +1,10 @@
 package com.example.security.repo;
 
-
-import com.example.security.domain.User;
+import com.example.security.domain.Unicorn;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+public interface UnicornRepo extends JpaRepository<Unicorn, Long> {
+
 }
