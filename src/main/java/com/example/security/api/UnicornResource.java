@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/unicorn")
 @RequiredArgsConstructor
-public class UnicornController {
+public class UnicornResource {
     private final UnicornService unicornService;
 
     @GetMapping
