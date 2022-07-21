@@ -26,7 +26,7 @@ public class UnicornServiceImpl implements com.example.security.service.interfac
     @Override
     public UnicornDto get(Long id) {
         var unicorn = repository.findById(id).orElseThrow();
-        log.info("Getting unicorn {} to db", unicorn.getName());
+        log.info("Getting unicorn {} from db", unicorn.getName());
         return mapper.toDto(unicorn);
     }
 }

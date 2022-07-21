@@ -8,7 +8,10 @@ import com.example.security.utils.mapper.PlanetMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class PlanetServiceImpl implements PlanetService {
     private final PlanetRepo repository;

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UnicornMapper extends AbstractMapper<Unicorn, UnicornDto> {
-
     @Autowired
     public UnicornMapper() {
         super(Unicorn.class, UnicornDto.class);
