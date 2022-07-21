@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/planet")
 @RestController
 @RequiredArgsConstructor
-public class PlanetController {
+public class PlanetResource {
     private final PlanetService planetService;
 
     @PostMapping
