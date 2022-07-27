@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import static org.modelmapper.config.Configuration.AccessLevel.PRIVATE;
 
 @Configuration
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class ModelMapping {
     @Bean
     public static ModelMapper modelMapper() {

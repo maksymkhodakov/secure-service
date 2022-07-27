@@ -1,19 +1,18 @@
 package com.example.security.api;
 
-import com.example.security.DTO.CourseDto;
 import com.example.security.DTO.StudentDto;
 import com.example.security.service.interfaces.StudentService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("api/students")
-@RequiredArgsConstructor
 public class StudentResource {
     private final StudentService studentService;
+
+    public StudentResource(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping("/get_student")
     public ResponseEntity<StudentDto> get(@RequestParam Long id) {
@@ -30,10 +29,5 @@ public class StudentResource {
             @RequestParam(name = "name") String name,
             @RequestParam(name = "surname") String surname) {
         return ResponseEntity.ok().body(studentService.getByNameAndSurname(name, surname));
-    }
-
-    @GetMapping("/get_courses_of_student")
-    public ResponseEntity<List<CourseDto>> getCoursesOfStudent(@RequestParam(name = "id") Long id) {
-        return ResponseEntity.ok().body(studentService.getCoursesByStudentId(id));
     }
 }
