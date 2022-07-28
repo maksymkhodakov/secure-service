@@ -2,7 +2,7 @@ package com.example.security.api;
 
 import com.example.security.DTO.RoleDto;
 import com.example.security.DTO.UserDto;
-import com.example.security.domain.RoleToUserForm;
+import com.example.security.DTO.RoleToUserForm;
 import com.example.security.service.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

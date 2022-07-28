@@ -1,9 +1,10 @@
 package com.example.security.DTO;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class RoleDto {
-    private Long id;
+@EqualsAndHashCode(callSuper = true)
+public class RoleDto extends AbstractDto {
     private String name;
 }
