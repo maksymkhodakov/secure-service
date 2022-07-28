@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -23,9 +20,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "username", unique = true)
     private String username;
+
+    @Column(name = "password", nullable = false)
     private String password;
+
     @ManyToMany(fetch = EAGER)
     private Collection<Role> roles = new ArrayList<>();
 }

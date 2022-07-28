@@ -19,7 +19,7 @@ public class Course extends AbstractEntity {
     private Collection<Student> students;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "id")
     public Collection<Student> getStudents() {
         return students;
     }
