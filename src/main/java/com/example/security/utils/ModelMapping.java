@@ -22,9 +22,4 @@ public class ModelMapping {
                 .setFieldAccessLevel(PRIVATE);
         return mapper;
     }
-
-    public static void configureDefaultModelMapper(ModelMapper modelMapper) {
-        modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.LOOSE);
-    }
 }
