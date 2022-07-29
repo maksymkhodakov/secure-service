@@ -3,9 +3,6 @@ package com.example.security.service.interfaces;
 
 import com.example.security.DTO.RoleDto;
 import com.example.security.DTO.UserDto;
-import com.example.security.domain.Role;
-import com.example.security.domain.User;
-
 import java.util.List;
 
 public interface UserService {
@@ -17,9 +14,4 @@ public interface UserService {
      * method @getUsers is not for production usage
      */
     List<UserDto> getUsers();
-
-    UserDto convertUserEntityToDto(User user);
-    User convertUserDtoToEntity(UserDto userDto);
-    RoleDto convertRoleEntityToDto(Role role);
-    Role convertRoleDtoToEntity(RoleDto roleDto);
 }

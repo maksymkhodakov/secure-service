@@ -2,15 +2,14 @@ package com.example.security.service.implementations;
 
 import com.example.security.DTO.RoleDto;
 import com.example.security.DTO.UserDto;
-import com.example.security.domain.Role;
 import com.example.security.domain.User;
 import com.example.security.repo.RoleRepo;
 import com.example.security.repo.UserRepo;
 import com.example.security.service.interfaces.UserService;
-import com.example.security.utils.ModelMapping;
+import com.example.security.utils.mapper.RoleMapper;
+import com.example.security.utils.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,8 +29,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
+    private final UserMapper userMapper;
+    private final RoleMapper roleMapper;
     private final PasswordEncoder passwordEncoder;
-    private final ModelMapper modelMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -54,19 +54,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDto saveUser(UserDto userDto) {
-        var user = convertUserDtoToEntity(userDto);
+        var user = userMapper.toEntity(userDto);
         log.info("Saving new user {} to db", user.getName());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         var savedUser = userRepo.save(user);
-        return convertUserEntityToDto(savedUser);
+        return userMapper.toDto(savedUser);
     }
 
     @Override
     public RoleDto saveRole(RoleDto roleDto) {
-        var role = convertRoleDtoToEntity(roleDto);
+        var role = roleMapper.toEntity(roleDto);
         log.info("Saving new {} to db", role.getName());
         var savedRole = roleRepo.save(role);
-        return convertRoleEntityToDto(savedRole);
+        return roleMapper.toDto(savedRole);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDto getUserByUsername(String username) {
         log.info("Getting user by username: {}", username);
         var user = userRepo.findByUsername(username);
-        return convertUserEntityToDto(user);
+        return userMapper.toDto(user);
     }
 
     @Override
@@ -89,31 +89,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         log.info("Getting all users from db");
         return userRepo.findAll()
                 .stream()
-                .map(this::convertUserEntityToDto)
+                .map(userMapper::toDto)
                 .toList();
-    }
-
-    @Override
-    public UserDto convertUserEntityToDto(User user) {
-        ModelMapping.configureDefaultModelMapper(modelMapper);
-        return modelMapper.map(user, UserDto.class);
-    }
-
-    @Override
-    public User convertUserDtoToEntity(UserDto userDto) {
-        ModelMapping.configureDefaultModelMapper(modelMapper);
-        return modelMapper.map(userDto, User.class);
-    }
-
-    @Override
-    public RoleDto convertRoleEntityToDto(Role role) {
-        ModelMapping.configureDefaultModelMapper(modelMapper);
-        return modelMapper.map(role, RoleDto.class);
-    }
-
-    @Override
-    public Role convertRoleDtoToEntity(RoleDto roleDto) {
-        ModelMapping.configureDefaultModelMapper(modelMapper);
-        return modelMapper.map(roleDto, Role.class);
     }
 }

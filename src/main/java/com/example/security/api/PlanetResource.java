@@ -21,4 +21,9 @@ public class PlanetResource {
     public ResponseEntity<PlanetDto> get(@RequestParam("id") Long id) {
         return ResponseEntity.ok(planetService.get(id));
     }
+
+    @GetMapping("/{name}")
+    public ResponseEntity<PlanetDto> getByName(@PathVariable(name = "name") String name) {
+        return ResponseEntity.ok(planetService.getByName(name));
+    }
 }

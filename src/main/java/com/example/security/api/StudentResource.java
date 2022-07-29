@@ -4,7 +4,7 @@ import com.example.security.DTO.StudentDto;
 import com.example.security.service.interfaces.StudentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.List;
 @RestController
 @RequestMapping("api/students")
 public class StudentResource {
@@ -29,5 +29,11 @@ public class StudentResource {
             @RequestParam(name = "name") String name,
             @RequestParam(name = "surname") String surname) {
         return ResponseEntity.ok().body(studentService.getByNameAndSurname(name, surname));
+    }
+
+    @GetMapping("/{surname}")
+    public ResponseEntity<List<StudentDto>> getStudentListBySurname(
+            @PathVariable(name = "surname") String surname) {
+        return ResponseEntity.ok(studentService.getByStudentSurname(surname));
     }
 }
