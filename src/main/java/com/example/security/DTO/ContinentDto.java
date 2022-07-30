@@ -11,5 +11,5 @@ public class ContinentDto extends AbstractDto {
     private String name;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Long planet;
+    private PlanetDto planet;
 }

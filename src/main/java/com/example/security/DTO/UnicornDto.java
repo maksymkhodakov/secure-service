@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.awt.*;
 import java.util.List;
 
 @Data
@@ -14,5 +15,5 @@ import java.util.List;
 public class UnicornDto extends AbstractDto {
     private String name;
     private List<DroidDto> droids;
-    private String color;
+    private Color color;
 }
