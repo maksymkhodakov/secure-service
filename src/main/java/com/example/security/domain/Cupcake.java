@@ -2,6 +2,7 @@ package com.example.security.domain;
 
 import com.example.security.domain.enums.Filling;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
@@ -12,23 +13,16 @@ import java.util.Objects;
 @Entity
 @Table(name = "cupcakes")
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cupcake extends AbstractEntity {
-
-    private Filling filling;
-    private Droid droid;
-
     @Column(name = "filling")
-    public Filling getFilling() {
-        return filling;
-    }
+    private Filling filling;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "droid_id")
-    public Droid getDroid() {
-        return droid;
-    }
+    private Droid droid;
 
     public Cupcake(Filling filling) {
         this.filling = filling;

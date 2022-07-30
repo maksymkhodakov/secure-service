@@ -1,6 +1,7 @@
 package com.example.security.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
@@ -9,15 +10,24 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@Setter
 @Entity
+@Setter
+@Getter
 @Table(name = "droids")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Droid extends AbstractEntity {
+    @Column(name = "name")
     private String name;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "unicorn_id")
     private Unicorn unicorn;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "droid")
     private List<Cupcake> cupcakes;
+
+    @Column(name = "alive")
     private Boolean alive;
 
     public Droid(String name, Unicorn unicorn, Boolean alive) {
@@ -29,27 +39,6 @@ public class Droid extends AbstractEntity {
     public Droid(String name, Boolean alive) {
         this.name = name;
         this.alive = alive;
-    }
-
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "unicorn_id")
-    public Unicorn getUnicorn() {
-        return unicorn;
-    }
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "droid")
-    public List<Cupcake> getCupcakes() {
-        return cupcakes;
-    }
-
-    @Column(name = "alive")
-    public Boolean getAlive() {
-        return alive;
     }
 
     @Override

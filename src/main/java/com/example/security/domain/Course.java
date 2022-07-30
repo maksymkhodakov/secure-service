@@ -2,6 +2,7 @@ package com.example.security.domain;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -12,27 +13,18 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
+@Getter
 @Table(name = "courses")
 public class Course extends AbstractEntity {
+    @Column(name = "name")
     private String courseName;
+
+    @Column(name = "teacher_name")
     private String teacherName;
-    private Collection<Student> students;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "id")
-    public Collection<Student> getStudents() {
-        return students;
-    }
-
-    @Column(name = "name")
-    public String getCourseName() {
-        return courseName;
-    }
-
-    @Column(name = "teacher_name")
-    public String getTeacherName() {
-        return teacherName;
-    }
+    private Collection<Student> students;
 
     @Override
     public boolean equals(Object o) {

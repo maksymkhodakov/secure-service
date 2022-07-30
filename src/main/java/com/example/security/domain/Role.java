@@ -10,15 +10,12 @@ import java.util.Objects;
 
 @Entity
 @Setter
+@Getter
 @ToString
 public class Role extends AbstractEntity {
 
-    private String name;
-
     @Column(name = "name", unique = true)
-    public String getName() {
-        return name;
-    }
+    private String name;
 
     public Role(Long id, LocalDateTime created, LocalDateTime updated, String name) {
         super(id, created, updated);

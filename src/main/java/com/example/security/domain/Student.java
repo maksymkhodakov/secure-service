@@ -1,6 +1,7 @@
 package com.example.security.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -11,26 +12,17 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
+@Getter
 @Table(name = "students")
 public class Student extends AbstractEntity {
+    @Column(name = "student_name")
     private String studentName;
-    private String studentSurname;
-    private Collection<Course> courses;
 
     @Column(name = "student_surname")
-    public String getStudentSurname() {
-        return studentSurname;
-    }
-
-    @Column(name = "student_name")
-    public String getStudentName() {
-        return studentName;
-    }
+    private String studentSurname;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    public Collection<Course> getCourses() {
-        return courses;
-    }
+    private Collection<Course> courses;
 
     @Override
     public boolean equals(Object o) {

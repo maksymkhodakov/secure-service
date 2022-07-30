@@ -16,36 +16,20 @@ import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Setter
+@Getter
 @ToString
 public class User extends AbstractEntity{
-
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "username", unique = true)
     private String username;
 
+    @Column(name = "password", nullable = false)
     private String password;
 
-    private Collection<Role> roles = new ArrayList<>();
-
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    @Column(name = "username", unique = true)
-    public String getUsername() {
-        return username;
-    }
-
-    @Column(name = "password", nullable = false)
-    public String getPassword() {
-        return password;
-    }
-
     @ManyToMany(fetch = EAGER)
-    public Collection<Role> getRoles() {
-        return roles;
-    }
+    private Collection<Role> roles = new ArrayList<>();
 
     public User(Long id, LocalDateTime created, LocalDateTime updated, String name, String username, String password, Collection<Role> roles) {
         super(id, created, updated);

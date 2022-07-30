@@ -1,6 +1,7 @@
 package com.example.security.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
@@ -12,28 +13,19 @@ import java.util.Objects;
 
 @MappedSuperclass
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class AbstractEntity implements Serializable {
-    Long id;
-    LocalDateTime created;
-    LocalDateTime updated;
-
     @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
 
     @Column(name = "created", updatable = false)
-    public LocalDateTime getCreated() {
-        return created;
-    }
+    LocalDateTime created;
 
     @Column(name = "updated", insertable = false)
-    public LocalDateTime getUpdated() {
-        return updated;
-    }
+    LocalDateTime updated;
 
     @PrePersist
     public void toCreate() {
@@ -50,7 +42,7 @@ public abstract class AbstractEntity implements Serializable {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         AbstractEntity that = (AbstractEntity) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

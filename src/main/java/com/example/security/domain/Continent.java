@@ -1,6 +1,7 @@
 package com.example.security.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
@@ -10,23 +11,17 @@ import java.util.Objects;
 
 @Entity
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "continents")
 public class Continent extends AbstractEntity {
-    private String name;
-    private Planet planet;
-
     @Column(name = "name")
-    public String getName() {
-        return name;
-    }
+    private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "planet_id")
-    public Planet getPlanet() {
-        return planet;
-    }
+    private Planet planet;
 
     @Override
     public boolean equals(Object o) {

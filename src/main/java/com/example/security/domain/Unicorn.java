@@ -2,6 +2,7 @@ package com.example.security.domain;
 
 import com.example.security.domain.enums.Color;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
@@ -13,31 +14,22 @@ import java.util.Objects;
 @Entity
 @Table(name = "unicorns")
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Unicorn extends AbstractEntity {
+    @Column(name = "name")
     private String name;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "unicorn")
     private List<Droid> droids;
+
+    @Column(name = "color")
     private Color color;
 
     public Unicorn(String name, Color color) {
         this.name = name;
         this.color = color;
-    }
-
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "unicorn")
-    public List<Droid> getDroids() {
-        return droids;
-    }
-
-    @Column(name = "color")
-    public Color getColor() {
-        return color;
     }
 
     @Override
