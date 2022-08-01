@@ -4,8 +4,9 @@ import com.example.security.domain.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CourseRepo extends JpaRepository<Course, Long> {
-    Course findByCourseName(String courseName);
-    List<Course> findByTeacherName(String teacherName);
+    Optional<Course> findByCourseName(String courseName);
+    Optional<List<Course>> findByTeacherName(String teacherName);
 }
