@@ -1,4 +1,4 @@
-package com.example.security.utils;
+package com.example.security.utils.mapper;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

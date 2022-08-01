@@ -1,13 +1,13 @@
-package com.example.security.security.realization;
+package com.example.security.utils.realization;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.security.DTO.UserDto;
 import com.example.security.domain.Role;
 import com.example.security.exceptions.RefreshTokenException;
-import com.example.security.security.contracts.RefreshTokenUtil;
+import com.example.security.utils.contracts.AlgorithmUtil;
+import com.example.security.utils.contracts.RefreshTokenUtil;
 import com.example.security.service.interfaces.UserService;
-import com.example.security.utils.AlgorithmUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,6 +31,7 @@ public class RefreshTokenUtilImpl implements RefreshTokenUtil {
     public static final String ERROR_MESSAGE = "error_message";
     public static final String REFRESH_TOKEN_IS_MISSING = "Refresh token is missing";
     private final UserService userService;
+    private final AlgorithmUtil algorithmUtil;
 
     @Override
     public void refresh(HttpServletRequest request,
@@ -42,7 +43,7 @@ public class RefreshTokenUtilImpl implements RefreshTokenUtil {
         else {
             try {
                 var refreshToken = authorizationHeader.substring(AUTH_SUBSTR.length());
-                var algorithm = AlgorithmUtil.getAlgorithm();
+                var algorithm = algorithmUtil.getAlgorithm();
                 var verifier = JWT.require(algorithm).build();
                 var decodeJWT = verifier.verify(refreshToken);
                 var username = decodeJWT.getSubject();
@@ -67,7 +68,6 @@ public class RefreshTokenUtilImpl implements RefreshTokenUtil {
     private static void configureResponse(HttpServletResponse response, Exception exception) {
         response.setHeader(HEADER_NAME, exception.getMessage());
         response.setStatus(FORBIDDEN.value());
-        response.setContentType(APPLICATION_JSON_VALUE);
     }
 
     private static void writeValues(HttpServletResponse response, HashMap<Object, Object> tokens) throws IOException {

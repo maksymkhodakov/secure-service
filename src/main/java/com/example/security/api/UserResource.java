@@ -3,7 +3,7 @@ package com.example.security.api;
 import com.example.security.DTO.RoleDto;
 import com.example.security.DTO.UserDto;
 import com.example.security.DTO.RoleToUserForm;
-import com.example.security.security.contracts.RefreshTokenUtil;
+import com.example.security.utils.contracts.RefreshTokenUtil;
 import com.example.security.service.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

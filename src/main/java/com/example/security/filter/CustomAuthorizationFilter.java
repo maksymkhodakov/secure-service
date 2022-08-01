@@ -1,8 +1,10 @@
 package com.example.security.filter;
 
 import com.auth0.jwt.JWT;
-import com.example.security.utils.AlgorithmUtil;
+import com.example.security.utils.contracts.AlgorithmUtil;
+import com.example.security.utils.realization.AlgorithmUtilImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,9 +26,11 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Slf4j
+@AllArgsConstructor
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
     public static final String AUTH_SUBSTR = "Bearer ";
+    private final AlgorithmUtil algorithmUtil;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -58,7 +62,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
     private void filtering(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain, String authorizationHeader) throws IOException, ServletException {
         var token = authorizationHeader.substring(AUTH_SUBSTR.length());
-        var algorithm = AlgorithmUtil.getAlgorithm();
+        var algorithm = algorithmUtil.getAlgorithm();
         var verifier = JWT.require(algorithm).build();
         var decodedJWT = verifier.verify(token);
         var username = decodedJWT.getSubject();

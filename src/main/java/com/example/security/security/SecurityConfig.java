@@ -2,6 +2,7 @@ package com.example.security.security;
 
 import com.example.security.filter.CustomAuthenticationFilter;
 import com.example.security.filter.CustomAuthorizationFilter;
+import com.example.security.utils.contracts.AlgorithmUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
+    private final AlgorithmUtil algorithmUtil;
 
     @Bean(name = "passwordEncoder")
     public static PasswordEncoder passwordEncoder() {
@@ -43,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        var customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
+        var customAuthenticationFilter =
+                new CustomAuthenticationFilter(authenticationManagerBean(), algorithmUtil);
         customAuthenticationFilter.setFilterProcessesUrl("/api/login");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
@@ -52,6 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
-        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new CustomAuthorizationFilter(algorithmUtil), UsernamePasswordAuthenticationFilter.class);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.security.security.contracts;
+package com.example.security.utils.contracts;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

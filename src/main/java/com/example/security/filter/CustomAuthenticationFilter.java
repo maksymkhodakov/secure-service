@@ -2,8 +2,10 @@ package com.example.security.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.security.utils.AlgorithmUtil;
+import com.example.security.utils.contracts.AlgorithmUtil;
+import com.example.security.utils.realization.AlgorithmUtilImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,12 +26,10 @@ import static java.util.stream.Collectors.toList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Slf4j
+@AllArgsConstructor
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
-
-    public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-    }
+    private final AlgorithmUtil algorithmUtil;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -42,20 +42,25 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException {
+    protected void successfulAuthentication(HttpServletRequest request,
+                                            HttpServletResponse response,
+                                            FilterChain chain,
+                                            Authentication authentication) throws IOException {
         var user = (User) authentication.getPrincipal();
-        var algorithm = AlgorithmUtil.getAlgorithm();
-        var access_token = generateAccessToken(request, user, algorithm);
-        var refresh_token = generateRefreshToken(request, user, algorithm);
-        response.setHeader("access_token", access_token);
-        response.setHeader("refresh_token", refresh_token);
-        generateTokensMap(response, access_token, refresh_token);
+        var algorithm = algorithmUtil.getAlgorithm();
+        var accessToken = generateAccessToken(request, user, algorithm);
+        var refreshToken = generateRefreshToken(request, user, algorithm);
+        response.setHeader("access_token", accessToken);
+        response.setHeader("refresh_token", refreshToken);
+        generateTokensMap(response, accessToken, refreshToken);
     }
 
-    private void generateTokensMap(HttpServletResponse response, String access_token, String refresh_token) throws IOException {
+    private void generateTokensMap(HttpServletResponse response,
+                                   String accessToken,
+                                   String refreshToken) throws IOException {
         var tokens = new HashMap<>();
-        tokens.put("access_token", access_token);
-        tokens.put("refresh_token", refresh_token);
+        tokens.put("access_token", accessToken);
+        tokens.put("refresh_token", refreshToken);
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
     }
@@ -73,7 +78,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                 .withIssuer(request.getRequestURL().toString())
-                .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(toList()))
+                .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
                 .sign(algorithm);
     }
 }
