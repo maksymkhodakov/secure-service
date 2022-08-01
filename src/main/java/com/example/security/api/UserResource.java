@@ -3,20 +3,26 @@ package com.example.security.api;
 import com.example.security.DTO.RoleDto;
 import com.example.security.DTO.UserDto;
 import com.example.security.DTO.RoleToUserForm;
+import com.example.security.security.contracts.RefreshTokenUtil;
 import com.example.security.service.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.net.URI;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/api")
 public class UserResource {
     private final UserService userService;
+    private final RefreshTokenUtil refreshTokenUtil;
 
     @GetMapping("/users")
     public ResponseEntity<List<UserDto>> getUsers() {
@@ -45,6 +51,13 @@ public class UserResource {
     @PostMapping("/role/addToUser")
     public ResponseEntity<Void> addRoleToUser(@RequestBody RoleToUserForm form) {
         userService.addRoleToUser(form.getUsername(), form.getRoleName());
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/token/refresh")
+    public ResponseEntity<Void> refreshToken(HttpServletRequest request,
+                             HttpServletResponse response) throws IOException {
+        refreshTokenUtil.refresh(request, response);
         return ResponseEntity.ok().build();
     }
 }
