@@ -6,6 +6,7 @@ import com.example.security.exceptions.StudentSurnameNotFound;
 import com.example.security.repo.StudentRepo;
 import com.example.security.service.interfaces.StudentService;
 import com.example.security.utils.mapper.StudentMapper;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -14,15 +15,10 @@ import java.util.List;
 @Slf4j
 @Service
 @Transactional
+@AllArgsConstructor
 public class StudentServiceImpl implements StudentService {
     private final StudentRepo studentRepo;
     private final StudentMapper studentMapper;
-
-    public StudentServiceImpl(StudentRepo studentRepo,
-                              StudentMapper studentMapper) {
-        this.studentRepo = studentRepo;
-        this.studentMapper = studentMapper;
-    }
 
     @Override
     public StudentDto save(StudentDto dto) {

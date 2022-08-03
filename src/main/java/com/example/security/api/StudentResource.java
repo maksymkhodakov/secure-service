@@ -2,17 +2,16 @@ package com.example.security.api;
 
 import com.example.security.DTO.StudentDto;
 import com.example.security.service.interfaces.StudentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+
 @RestController
 @RequestMapping("api/students")
+@RequiredArgsConstructor
 public class StudentResource {
     private final StudentService studentService;
-
-    public StudentResource(StudentService studentService) {
-        this.studentService = studentService;
-    }
 
     @GetMapping("/get_student")
     public ResponseEntity<StudentDto> get(@RequestParam Long id) {
