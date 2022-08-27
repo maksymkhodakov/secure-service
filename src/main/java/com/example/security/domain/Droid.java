@@ -17,6 +17,12 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Droid extends AbstractEntity {
+    @Column(name = "hp")
+    private Integer hp;
+
+    @Column(name = "attack_hp")
+    private Integer attackHp;
+
     @Column(name = "name")
     private String name;
 
