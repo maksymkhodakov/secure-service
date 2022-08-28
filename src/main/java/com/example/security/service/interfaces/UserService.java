@@ -3,6 +3,7 @@ package com.example.security.service.interfaces;
 
 import com.example.security.DTO.RoleDto;
 import com.example.security.DTO.UserDto;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface UserService {
@@ -14,4 +15,10 @@ public interface UserService {
      * method @getUsers is not for production usage
      */
     List<UserDto> getUsers();
+
+    List<UserDto> findByName(String name);
+
+    List<UserDto> findUserByPassword(String password);
+
+    UserDto findByCreatedBetween(LocalDateTime start, LocalDateTime end);
 }

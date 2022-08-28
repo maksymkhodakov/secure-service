@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/warfare")
 @AllArgsConstructor
-public class WarfareController {
+public class WarfareResource {
     private final WarfareService warfareService;
 
     @GetMapping("/letsBattle")

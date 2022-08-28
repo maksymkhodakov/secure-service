@@ -14,17 +14,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UserResource {
     private final UserService userService;
     private final RefreshTokenUtil refreshTokenUtil;
 
-    @GetMapping("/users")
+    @GetMapping("/allUsers")
     public ResponseEntity<List<UserDto>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
@@ -59,5 +60,21 @@ public class UserResource {
                              HttpServletResponse response) throws IOException {
         refreshTokenUtil.refresh(request, response);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/getByName/{name}")
+    public ResponseEntity<List<UserDto>> findByName(@PathVariable String name) {
+        return ResponseEntity.ok(userService.findByName(name));
+    }
+
+    @GetMapping("/getByPassword/{password}")
+    public ResponseEntity<List<UserDto>> findUserByPassword(@PathVariable String password) {
+        return ResponseEntity.ok(userService.findUserByPassword(password));
+    }
+
+    @GetMapping("/getByDatesBetween")
+    public ResponseEntity<UserDto> findByCreatedBetween(@RequestParam LocalDateTime start,
+                                                        @RequestParam LocalDateTime end) {
+        return ResponseEntity.ok(userService.findByCreatedBetween(start, end));
     }
 }

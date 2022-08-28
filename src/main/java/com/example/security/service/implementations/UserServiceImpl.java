@@ -3,6 +3,7 @@ package com.example.security.service.implementations;
 import com.example.security.DTO.RoleDto;
 import com.example.security.DTO.UserDto;
 import com.example.security.domain.User;
+import com.example.security.exceptions.UserNotFound;
 import com.example.security.repo.RoleRepo;
 import com.example.security.repo.UserRepo;
 import com.example.security.service.interfaces.UserService;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -91,5 +93,32 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 .stream()
                 .map(userMapper::toDto)
                 .toList();
+    }
+
+    @Override
+    public List<UserDto> findByName(String name) {
+        log.info("Getting user(s) by name: " + name);
+        var users = userRepo.findByName(name)
+                .orElseThrow(() -> new UserNotFound("User not found !!!"));
+        return users.stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<UserDto> findUserByPassword(String password) {
+        log.info("Getting user(s) by password: " + password);
+        var users = userRepo.findUserByPassword(password)
+                .orElseThrow(() -> new UserNotFound("User not found !!!"));
+        return users.stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public UserDto findByCreatedBetween(LocalDateTime start, LocalDateTime end) {
+        return userMapper.toDto(userRepo.findByCreatedBetween(start, end)
+                .orElseThrow(() -> new UserNotFound("User(s) that was(were) created between :" +
+                        start + " and " + end)));
     }
 }
