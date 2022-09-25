@@ -10,7 +10,8 @@ import java.util.Optional;
 public interface HeroRepo extends JpaRepository<Hero, Long>, JpaSpecificationExecutor<Hero> {
     @Query(nativeQuery = true, value = "" +
             "SELECT * FROM heroes " +
+            "WHERE city_name = :cityName " +
             "ORDER BY created DESC LIMIT 1;"
     )
-    Optional<Hero> findLastCreatedHero();
+    Optional<Hero> findLastCreatedHeroInCity(String cityName);
 }
