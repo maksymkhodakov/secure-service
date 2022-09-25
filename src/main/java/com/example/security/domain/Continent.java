@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +24,9 @@ public class Continent extends AbstractEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "planet_id")
     private Planet planet;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "continent")
+    private List<Hero> heroes = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

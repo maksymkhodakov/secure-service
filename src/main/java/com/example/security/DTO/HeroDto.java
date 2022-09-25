@@ -1,22 +1,25 @@
 package com.example.security.DTO;
 
-import com.example.security.domain.Hero;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ContinentDto extends AbstractDto {
+public class HeroDto extends AbstractDto {
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String name;
+    private String firstName;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private PlanetDto planet;
+    private String lastName;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<HeroDto> heroes;
+    private String city;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private LocalDateTime dateOfBirth;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private ContinentDto continent;
 }
