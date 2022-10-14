@@ -4,10 +4,8 @@ import com.example.security.service.IMetadata;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.UtilityClass;
-import org.springframework.stereotype.Component;
 import java.util.*;
 
-@Component
 @Getter
 @Setter
 @UtilityClass
