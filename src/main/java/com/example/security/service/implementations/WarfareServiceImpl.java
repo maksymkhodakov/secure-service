@@ -3,7 +3,7 @@ package com.example.security.service.implementations;
 import com.example.security.domain.Droid;
 import com.example.security.exceptions.DroidNotFound;
 import com.example.security.repo.DroidRepo;
-import com.example.security.service.interfaces.WarfareService;
+import com.example.security.service.WarfareService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

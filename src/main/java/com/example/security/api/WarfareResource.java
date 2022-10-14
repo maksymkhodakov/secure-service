@@ -1,7 +1,7 @@
 package com.example.security.api;
 
 import com.example.security.DTO.DroidDto;
-import com.example.security.service.interfaces.WarfareService;
+import com.example.security.service.WarfareService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;

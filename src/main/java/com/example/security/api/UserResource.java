@@ -4,7 +4,7 @@ import com.example.security.DTO.RoleDto;
 import com.example.security.DTO.UserDto;
 import com.example.security.DTO.RoleToUserForm;
 import com.example.security.utils.contracts.RefreshTokenUtil;
-import com.example.security.service.interfaces.UserService;
+import com.example.security.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

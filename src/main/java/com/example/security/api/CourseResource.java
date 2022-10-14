@@ -1,7 +1,7 @@
 package com.example.security.api;
 
 import com.example.security.DTO.CourseDto;
-import com.example.security.service.interfaces.CourseService;
+import com.example.security.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

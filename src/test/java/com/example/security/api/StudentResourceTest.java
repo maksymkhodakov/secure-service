@@ -11,7 +11,7 @@ import com.example.security.DTO.StudentDto;
 import com.example.security.domain.Student;
 import com.example.security.repo.StudentRepo;
 import com.example.security.service.implementations.StudentServiceImpl;
-import com.example.security.service.interfaces.StudentService;
+import com.example.security.service.StudentService;
 import com.example.security.utils.mapper.StudentMapper;
 
 import java.time.LocalDateTime;

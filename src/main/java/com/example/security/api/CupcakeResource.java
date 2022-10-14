@@ -2,7 +2,7 @@ package com.example.security.api;
 
 import com.example.security.DTO.CupcakeDto;
 import com.example.security.DTO.DroidDto;
-import com.example.security.service.interfaces.CupcakeService;
+import com.example.security.service.CupcakeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

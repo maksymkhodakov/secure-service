@@ -2,7 +2,7 @@ package com.example.security.api;
 
 import com.example.security.DTO.UnicornDto;
 import com.example.security.domain.enums.Color;
-import com.example.security.service.interfaces.UnicornService;
+import com.example.security.service.UnicornService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

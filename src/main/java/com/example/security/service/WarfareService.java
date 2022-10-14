@@ -1,4 +1,4 @@
-package com.example.security.service.interfaces;
+package com.example.security.service;
 
 import java.util.List;
 

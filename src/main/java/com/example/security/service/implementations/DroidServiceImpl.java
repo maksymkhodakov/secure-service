@@ -4,7 +4,7 @@ import com.example.security.DTO.DroidDto;
 import com.example.security.DTO.UnicornDto;
 import com.example.security.exceptions.DroidNotFound;
 import com.example.security.repo.DroidRepo;
-import com.example.security.service.interfaces.DroidService;
+import com.example.security.service.DroidService;
 import com.example.security.utils.mapper.DroidMapper;
 import com.example.security.utils.mapper.UnicornMapper;
 import lombok.RequiredArgsConstructor;

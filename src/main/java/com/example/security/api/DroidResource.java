@@ -2,7 +2,7 @@ package com.example.security.api;
 
 import com.example.security.DTO.DroidDto;
 import com.example.security.DTO.UnicornDto;
-import com.example.security.service.interfaces.DroidService;
+import com.example.security.service.DroidService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

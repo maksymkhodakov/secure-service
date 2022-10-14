@@ -1,7 +1,7 @@
 package com.example.security.api;
 
 import com.example.security.DTO.StudentDto;
-import com.example.security.service.interfaces.StudentService;
+import com.example.security.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

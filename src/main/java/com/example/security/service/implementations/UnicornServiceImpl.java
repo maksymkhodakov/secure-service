@@ -5,7 +5,7 @@ import com.example.security.domain.enums.Color;
 import com.example.security.exceptions.UnicornColorNotFound;
 import com.example.security.exceptions.UnicornNameNotFound;
 import com.example.security.repo.UnicornRepo;
-import com.example.security.service.interfaces.UnicornService;
+import com.example.security.service.UnicornService;
 import com.example.security.utils.mapper.UnicornMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

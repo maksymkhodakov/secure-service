@@ -1,4 +1,4 @@
-package com.example.security.service.interfaces;
+package com.example.security.service;
 
 import com.example.security.DTO.ContinentDto;
 import com.example.security.DTO.PlanetDto;

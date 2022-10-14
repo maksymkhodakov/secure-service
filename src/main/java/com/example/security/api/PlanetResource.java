@@ -1,7 +1,7 @@
 package com.example.security.api;
 
 import com.example.security.DTO.PlanetDto;
-import com.example.security.service.interfaces.PlanetService;
+import com.example.security.service.PlanetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

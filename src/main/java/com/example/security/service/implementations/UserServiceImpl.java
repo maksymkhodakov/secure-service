@@ -6,7 +6,7 @@ import com.example.security.domain.User;
 import com.example.security.exceptions.UserNotFound;
 import com.example.security.repo.RoleRepo;
 import com.example.security.repo.UserRepo;
-import com.example.security.service.interfaces.UserService;
+import com.example.security.service.UserService;
 import com.example.security.utils.mapper.RoleMapper;
 import com.example.security.utils.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;

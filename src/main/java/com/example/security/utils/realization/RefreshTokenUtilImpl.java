@@ -7,7 +7,7 @@ import com.example.security.domain.Role;
 import com.example.security.exceptions.RefreshTokenException;
 import com.example.security.utils.contracts.AlgorithmUtil;
 import com.example.security.utils.contracts.RefreshTokenUtil;
-import com.example.security.service.interfaces.UserService;
+import com.example.security.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

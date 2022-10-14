@@ -4,7 +4,7 @@ import com.example.security.DTO.ReportDto;
 import com.example.security.domain.Report;
 import com.example.security.exceptions.ReportNotFound;
 import com.example.security.repo.ReportRepository;
-import com.example.security.service.interfaces.ReportService;
+import com.example.security.service.ReportService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

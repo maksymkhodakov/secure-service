@@ -3,7 +3,7 @@ package com.example.security.service.implementations;
 import com.example.security.DTO.HeroDto;
 import com.example.security.exceptions.HeroNotFound;
 import com.example.security.repo.HeroRepo;
-import com.example.security.service.interfaces.HeroService;
+import com.example.security.service.HeroService;
 import com.example.security.utils.mapper.HeroMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

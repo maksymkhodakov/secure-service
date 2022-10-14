@@ -1,7 +1,7 @@
 package com.example.security.api;
 
 import com.example.security.DTO.ReportDto;
-import com.example.security.service.interfaces.ReportService;
+import com.example.security.service.ReportService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

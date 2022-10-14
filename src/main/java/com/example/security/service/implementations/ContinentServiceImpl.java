@@ -5,7 +5,7 @@ import com.example.security.DTO.PlanetDto;
 import com.example.security.exceptions.ContinentNameNotFound;
 import com.example.security.exceptions.ContinentNotFoundException;
 import com.example.security.repo.ContinentRepo;
-import com.example.security.service.interfaces.ContinentService;
+import com.example.security.service.ContinentService;
 import com.example.security.utils.mapper.ContinentMapper;
 import com.example.security.utils.mapper.PlanetMapper;
 import lombok.RequiredArgsConstructor;

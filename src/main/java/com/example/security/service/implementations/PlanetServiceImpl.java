@@ -4,7 +4,7 @@ import com.example.security.DTO.PlanetDto;
 import com.example.security.exceptions.PlanetException;
 import com.example.security.exceptions.PlanetNameNotFound;
 import com.example.security.repo.PlanetRepo;
-import com.example.security.service.interfaces.PlanetService;
+import com.example.security.service.PlanetService;
 import com.example.security.utils.mapper.PlanetMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
