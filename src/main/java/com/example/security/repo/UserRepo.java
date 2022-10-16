@@ -2,6 +2,8 @@ package com.example.security.repo;
 
 
 import com.example.security.domain.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -21,4 +23,10 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     @Query("select u from User u where u.created between ?1 and ?2")
     Optional<User> findByCreatedBetween(LocalDateTime start, LocalDateTime end);
+
+    @Query("SELECT u FROM User u WHERE u.name = :name")
+    Page<User> findByName(String name, Pageable pageable);
+
+    @Query("SELECT u FROM User u WHERE u.updated = :updated")
+    Page<User> findByUpdateTime(String dateTime, Pageable pageable);
 }
