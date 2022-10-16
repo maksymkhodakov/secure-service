@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    @Transactional
     public UserDto saveUser(UserDto userDto) {
         var user = userMapper.toEntity(userDto);
         log.info("Saving new user {} to db", user.getName());
@@ -64,6 +65,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    @Transactional
     public RoleDto saveRole(RoleDto roleDto) {
         var role = roleMapper.toEntity(roleDto);
         log.info("Saving new {} to db", role.getName());
@@ -72,6 +74,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    @Transactional
     public void addRoleToUser(String username, String roleName) {
         log.info("Adding role {} to user {}", roleName, username);
         var user = userRepo.findByUsername(username);
@@ -89,7 +92,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public List<UserDto> getUsers() {
         log.info("Getting all users from db");
-        return userRepo.findAll()
+        return userRepo.findAllUsers()
                 .stream()
                 .map(userMapper::toDto)
                 .toList();

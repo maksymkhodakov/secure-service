@@ -5,8 +5,11 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -16,6 +19,9 @@ public class Role extends AbstractEntity {
 
     @Column(name = "name", unique = true)
     private String name;
+
+    @ManyToMany
+    private Set<User> users = new HashSet<>();
 
     public Role(Long id, LocalDateTime created, LocalDateTime updated, String name) {
         super(id, created, updated);

@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepo extends JpaRepository<User, Long> {
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.roles")
+    List<User> findAllUsers();
+
     @Query("select u from User u where u.username = ?1")
     User findByUsername(String username);
 
