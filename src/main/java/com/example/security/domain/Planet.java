@@ -20,7 +20,7 @@ public class Planet extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "planet")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "planet")
     private List<Continent> continents;
 
     @Override

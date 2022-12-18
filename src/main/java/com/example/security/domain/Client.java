@@ -7,9 +7,7 @@ import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -17,14 +15,20 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "client")
+@NamedEntityGraph(name = "Client.contacts",
+        attributeNodes = @NamedAttributeNode("contactNumbers"))
 public class Client extends AbstractEntity {
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinTable(name = "client_contact",
             joinColumns = @JoinColumn(name = "client_id"),
             foreignKey = @ForeignKey(name = "fk_client_contact__client"),
             inverseJoinColumns = @JoinColumn(name = "contact_id"),
             inverseForeignKey = @ForeignKey(name = "fk_client_contact__contact"))
-    private Set<Contact> contactNumbers = new HashSet<>();
+    private List<Contact> contactNumbers = new ArrayList<>();
+
+    @Column(name = "roles_id")
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Role> roles = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

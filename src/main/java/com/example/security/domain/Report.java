@@ -21,7 +21,7 @@ public class Report extends AbstractEntity implements IReport {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User owner;
 
