@@ -1,20 +1,24 @@
 package com.example.security.domain;
 
 import com.example.security.domain.convertors.ActiveYearsConverter;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.CollectionId;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Setter
 @Getter
 @ToString
-@EqualsAndHashCode
 @Cacheable
 @NamedEntityGraph(name = "graph.roles", attributeNodes = @NamedAttributeNode("roles"))
 public class User extends AbstractEntity{
@@ -29,7 +33,7 @@ public class User extends AbstractEntity{
 
     @Column(name = "active_years")
     @Convert(converter = ActiveYearsConverter.class)
-    private String activeYears;
+    private List<Integer> activeYears;
 
     @ManyToMany(mappedBy = "users")
     @Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
@@ -45,4 +49,17 @@ public class User extends AbstractEntity{
     }
 
     public User() {}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
