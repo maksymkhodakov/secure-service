@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -24,7 +23,7 @@ public class ReportServiceImpl implements ReportService {
         return reportRepository.findAll()
                 .stream()
                 .map(ReportDto::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
