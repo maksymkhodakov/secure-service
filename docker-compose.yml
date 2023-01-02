@@ -6,7 +6,7 @@ services:
     image: mysql
     platform: linux/amd64
     ports:
-      - 3306:3306
+      - 3307:3307
     environment:
       MYSQL_ROOT_HOST: localhost
       MYSQL_ROOT_PASSWORD: adminpassword
