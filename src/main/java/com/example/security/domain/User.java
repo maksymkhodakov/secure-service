@@ -1,5 +1,6 @@
 package com.example.security.domain;
 
+import com.example.security.domain.convertors.ActiveYearsConverter;
 import lombok.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -27,6 +28,7 @@ public class User extends AbstractEntity{
     private String password;
 
     @Column(name = "active_years")
+    @Convert(converter = ActiveYearsConverter.class)
     private String activeYears;
 
     @ManyToMany(mappedBy = "users")
