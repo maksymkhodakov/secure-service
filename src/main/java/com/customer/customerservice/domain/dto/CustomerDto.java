@@ -20,4 +20,9 @@ public class CustomerDto implements ICustomer {
         this.lastName = iCustomer.getLastName();
         this.email = iCustomer.getEmail();
     }
+
+    @Override
+    public Long getId() {
+        return null;
+    }
 }
