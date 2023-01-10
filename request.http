@@ -1,0 +1,9 @@
+POST http://localhost:8081/api/v1/customers/register
+Content-Type: application/json
+
+{
+  "id": "2",
+  "firstName": "James",
+  "lastName": "Goslenko",
+  "email": "test1@test.com"
+}
