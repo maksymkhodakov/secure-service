@@ -3,7 +3,6 @@ package com.example.fraudcheckerservice.api;
 import com.example.fraudcheckerservice.domain.dto.FraudCheckDTO;
 import com.example.fraudcheckerservice.service.FraudService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
