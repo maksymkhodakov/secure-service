@@ -29,8 +29,10 @@ public class Customer extends AbstractEntity implements ICustomer {
     @Column(name = "deleted")
     private boolean deleted;
 
+    @Column(name = "is_fraudster")
+    private boolean isFraudster;
+
     public Customer(ICustomer iCustomer) {
-        this.id = iCustomer.getId();
         this.firstName = iCustomer.getFirstName();
         this.lastName = iCustomer.getLastName();
         this.email = iCustomer.getEmail();

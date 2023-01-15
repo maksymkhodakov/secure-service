@@ -18,8 +18,7 @@ public class CustomerValidatorImpl implements CustomerValidator {
     }
 
     private static boolean isValidRegistrationData(CustomerRegistrationData customerData) {
-        return nonNull(customerData.getId()) && customerData.getId() > 0
-                && nonNull(customerData.getEmail()) && !isEmpty(customerData.getEmail())
+        return nonNull(customerData.getEmail()) && !isEmpty(customerData.getEmail())
                 && nonNull(customerData.getFirstName()) && nonNull(customerData.getLastName());
     }
 }

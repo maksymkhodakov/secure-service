@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/customers")
@@ -24,5 +26,10 @@ public class CustomerController {
     @GetMapping("/info/{id}")
     public ResponseEntity<CustomerFullName> getInfo(@PathVariable String id) {
         return ResponseEntity.ok(customerService.getCustomerFullName(Long.valueOf(id)));
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity<List<CustomerFullName>> getAllInfo() {
+        return ResponseEntity.ok(customerService.getCustomersInfo());
     }
 }
