@@ -2,6 +2,7 @@ package com.customer.customerservice.service.impl;
 
 import com.customer.customerservice.domain.data.CustomerRegistrationData;
 import com.customer.customerservice.domain.dto.CustomerDto;
+import com.customer.customerservice.domain.dto.CustomerFullName;
 import com.customer.customerservice.domain.entity.Customer;
 import com.customer.customerservice.repository.CustomerRepository;
 import com.customer.customerservice.service.CustomerService;
@@ -24,5 +25,10 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.save(new Customer(customerData));
         log.info("Customer with id: {} has been saved to db!", customerData.getId());
         return new CustomerDto(customerData);
+    }
+
+    @Override
+    public CustomerFullName getCustomerFullName(Long id) {
+        return customerRepository.findCustomerFullName(id);
     }
 }
