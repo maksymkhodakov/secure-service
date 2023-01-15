@@ -21,7 +21,7 @@ import static java.util.Objects.nonNull;
 @Service
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
-    public static final String FRAUD_CHECK_API = "http://localhost:8082/api/v1/fraud-check/{customerId}";
+    public static final String FRAUD_CHECK_API = "http://FRAUD-SERVICE/api/v1/fraud-check/{customerId}";
     private final CustomerRepository customerRepository;
     private final CustomerValidator customerValidator;
     private final RestTemplate restTemplate;
