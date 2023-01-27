@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AlgorithmUtilImpl implements AlgorithmUtil {
 
-    public static final String SECRET_VALUE = "secret";
+    private static final String SECRET_VALUE = "secret";
 
     public Algorithm getAlgorithm() {
         return Algorithm.HMAC256(SECRET_VALUE.getBytes());

@@ -12,21 +12,21 @@ import java.util.Objects;
 
 @Component
 public class CupcakeMapper extends AbstractMapper<Cupcake, CupcakeDto> {
-    private final ModelMapper mapper;
+    private final ModelMapper modelMapper;
     private final DroidRepo droidRepository;
 
     @Autowired
-    public CupcakeMapper(ModelMapper mapper, DroidRepo droidRepository) {
+    public CupcakeMapper(ModelMapper modelMapper, DroidRepo droidRepository) {
         super(Cupcake.class, CupcakeDto.class);
-        this.mapper = mapper;
+        this.modelMapper = modelMapper;
         this.droidRepository = droidRepository;
     }
 
     @PostConstruct
     public void setupMapper() {
-        mapper.createTypeMap(Cupcake.class, CupcakeDto.class)
+        modelMapper.createTypeMap(Cupcake.class, CupcakeDto.class)
                 .addMappings(m -> m.skip(CupcakeDto::setDroidId)).setPostConverter(toDtoConverter());
-        mapper.createTypeMap(CupcakeDto.class, Cupcake.class)
+        modelMapper.createTypeMap(CupcakeDto.class, Cupcake.class)
                 .addMappings(m -> m.skip(Cupcake::setDroid)).setPostConverter(toEntityConverter());
     }
 
